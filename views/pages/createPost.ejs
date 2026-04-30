@@ -1,0 +1,30 @@
+<%- include('../partials/navbar') %>
+
+<div class="container" style="margin-top: 2rem;">
+  <h2>Create New Post</h2>
+  
+  <form id="postForm">
+    <input type="text" id="title" placeholder="Post Title" required>
+    <textarea id="content" placeholder="Write your story here..." required></textarea>
+    <button type="submit">Publish Post</button>
+  </form>
+</div>
+
+<script>
+document.getElementById('postForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  await fetch('/api/posts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      title: document.getElementById('title').value,
+      content: document.getElementById('content').value
+    })
+  });
+
+  window.location.href = '/dashboard';
+});
+</script>
+
+<%- include('../partials/footer') %>

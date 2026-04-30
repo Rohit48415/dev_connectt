@@ -1,0 +1,26 @@
+<%- include('../partials/navbar') %>
+
+<div class="posts-container">
+  <h2>📚 All Posts</h2>
+  
+  <% if (posts && posts.length > 0) { %>
+    <% posts.forEach(post => { %>
+      <div class="post">
+        <h3><%= post.title %></h3>
+        <p><%= post.content %></p>
+        <div class="post-meta">
+          <span class="post-author">✍️ <%= post.author.name %></span>
+          <% if (post.createdAt) { %>
+            <span><%= new Date(post.createdAt).toLocaleDateString() %></span>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="empty-state">
+      <p>📭 No posts yet. Start by <a href="/create" class="link">creating one!</a></p>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>
